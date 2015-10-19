@@ -1,5 +1,7 @@
 <?php namespace Simexis\CKEditor;
 
+use Simexis\Filemanager\FilemanagerServiceProvider;
+
 class CKEditor {
 
     const TYPE_FULL = 'full';
@@ -117,7 +119,7 @@ class CKEditor {
         if(!isset($this->filebrowser[$key]))
             $this->setFilebrowser($key, $this->config('config.filebrowser' . $key));
 		if(!$this->filebrowser[$key])
-			$this->filebrowser[$key] = with(new Simexis\Filemanager\FilemanagerServiceProvider($this->app))->getFilebrowser($key);
+			$this->filebrowser[$key] = with(new FilemanagerServiceProvider($this->app))->getFilebrowser($key);
         return $this->filebrowser[$key];
     }
 
