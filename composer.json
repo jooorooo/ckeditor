@@ -15,9 +15,5 @@
         "psr-0": {
             "Simexis\\CKEditor\\": "src/"
         }
-    },
-    "support": {
-        "email": "jooorooo@gmail.com"
-    },
-    "minimum-stability": "stable"
+    }
 }

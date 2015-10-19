@@ -116,6 +116,8 @@ class CKEditor {
     public function getFilebrowser($key) {
         if(!isset($this->filebrowser[$key]))
             $this->setFilebrowser($key, $this->config('config.filebrowser' . $key));
+		if(!$this->filebrowser[$key])
+			$this->filebrowser[$key] = with(new Simexis\Filemanager\FilemanagerServiceProvider($this->app))->getFilebrowser($key);
         return $this->filebrowser[$key];
     }
 
