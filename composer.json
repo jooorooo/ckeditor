@@ -1,6 +1,6 @@
 {
-    "name": "simexis/braintree",
-    "description": "A Braintree Service provider",
+    "name": "simexis/ckeditor",
+    "description": "Ckeditor for laravel 5.x",
     "license": "MIT",
     "authors": [
         {
@@ -12,12 +12,11 @@
         "php": ">=5.4.0",
         "illuminate/support": "5.*",
         "illuminate/filesystem": "5.*",
-        "illuminate/console": "5.*",
-        "braintree/braintree_php" : ">=3.0.1"
+        "illuminate/console": "5.*"
     },
     "autoload": {
         "psr-0": {
-            "Simexis\\Braintree\\": "src/"
+            "Simexis\\CKEditor\\": "src/"
         }
     },
     "support": {
