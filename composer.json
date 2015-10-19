@@ -1,0 +1,27 @@
+{
+    "name": "simexis/braintree",
+    "description": "A Braintree Service provider",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Georgi Nachev",
+            "email": "jooorooo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*",
+        "illuminate/filesystem": "5.*",
+        "illuminate/console": "5.*",
+        "braintree/braintree_php" : ">=3.0.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Simexis\\Braintree\\": "src/"
+        }
+    },
+    "support": {
+        "email": "jooorooo@gmail.com"
+    },
+    "minimum-stability": "stable"
+}
