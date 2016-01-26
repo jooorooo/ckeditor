@@ -41,7 +41,7 @@ class CKEditorServiceProvider extends ServiceProvider {
 	 */
     public function register()
     {
-		$this->app->bindShared('ckeditor', function ($app) {
+		$this->app->singleton('ckeditor', function ($app) {
             return new CKEditor($app);
         });
 
