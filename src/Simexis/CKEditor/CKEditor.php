@@ -1,6 +1,6 @@
 <?php namespace Simexis\CKEditor;
 
-use Simexis\Filemanager\FilemanagerServiceProvider;
+use Simexis\Filemanager\Filemanager;
 
 class CKEditor {
 
@@ -115,11 +115,11 @@ class CKEditor {
         return $this;
     }
 
-    public function getFilebrowser($key) {
+    public function getFilebrowser($key, $upload = false) {
         if(!isset($this->filebrowser[$key]))
             $this->setFilebrowser($key, $this->config('config.filebrowser' . $key));
 		if(!$this->filebrowser[$key])
-			$this->filebrowser[$key] = with(new FilemanagerServiceProvider($this->app))->getFilebrowser($key);
+			$this->filebrowser[$key] = $upload ? with(new Filemanager($this->app))->uploadUrl() : with(new Filemanager($this->app))->browseUrl();
         return $this->filebrowser[$key];
     }
 
@@ -163,12 +163,23 @@ class CKEditor {
         }
 
         $script .= "\nCKEDITOR.config.language = '" . $this->getLanguage() . "';";
-        foreach(['BrowseUrl', 'ImageBrowseUrl', 'FlashBrowseUrl', 'UploadUrl', 'ImageUploadUrl', 'FlashUploadUrl'] AS $key) {
+        foreach(['BrowseUrl', 'ImageBrowseUrl', 'FlashBrowseUrl'] AS $key) {
             if(!is_null($res = $this->getFilebrowser($key))) {
                 $script .= "\nCKEDITOR.config.filebrowser{$key} = '" . $res . "';";
             }
         }
+        foreach(['UploadUrl', 'ImageUploadUrl', 'FlashUploadUrl'] AS $key) {
+            if(!is_null($res = $this->getFilebrowser($key, true))) {
+                $script .= "\nCKEDITOR.config.filebrowser{$key} = '" . $res . "';";
+            }
+        }
         $script .= "\nCKEDITOR.config.allowedContent = " . $this->getAllowedContent() . ";";
+
+        $script .= "\n if(jQuery) {
+        jQuery(document).off('.ckeditor-upload').on('click.ckeditor-upload', '', function() {
+
+        });
+        }";
 
         if ( $this->getToolbarConfig() )
         {
